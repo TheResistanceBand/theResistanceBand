@@ -41,7 +41,8 @@ parser.on('data', data => { // on data from the arduino
 	 
 	// Control video/audio playback. 
 	var player = Omx('clap.wav');
-	player.play();
+	player.volUp();
+	// player.play();
 	// player.volUp();
   }
  //   else {

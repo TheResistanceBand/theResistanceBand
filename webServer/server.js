@@ -46,7 +46,7 @@ parser.on('data', data => { // on data from the arduino
 	// player.volUp();
 	isPlaying = true;
   } else {
-	player.quit();
+	player.rewind();
   	isPlaying = false;
   }
 });

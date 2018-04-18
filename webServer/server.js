@@ -33,13 +33,12 @@ const parser = new readLine({
 serial.pipe(parser);
 var isPlaying = false;
 parser.on('data', function(data) { // on data from the arduino
-  if (+data.substring(7) > 20 && !isPlaying) {
+  if (+data.substring(7) > 100 && !isPlaying) {
     console.log(data);
     isPlaying = true;
     io.emit('drum1');
   } else {
-    console.log('under 20');
-    // isPlaying = false;
+    isPlaying = false;
   }
 });
 //----------------------------------------------------------------------------//

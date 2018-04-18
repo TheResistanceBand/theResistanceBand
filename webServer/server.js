@@ -34,21 +34,14 @@ const parser = new readLine({
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
-    // io.emit('drum1');
+    io.emit('drum1');
 	// Import the module. 
 	 
 	// Create an instance of the player with the source. 
 	 
 	// Control video/audio playback. 
-	var player = Omx('clap.wav');
-	// player.volUp();
-	// player.play();
-	// player.volUp();
+	// var player = Omx('clap.wav');
   }
- //   else {
-	// player.rewind();
- //  	isPlaying = false;
- //  }
 });
 //----------------------------------------------------------------------------//
 

@@ -25,7 +25,7 @@ void loop() {
   if (drumVal > 100 && !isPlaying) {
     Serial.println("drum1");
     isPlaying = true;
-  } else {
+  } else if (drumVal < 20 && isPlaying) {
     isPlaying = false;
   }
   //Serial.println("Value: "+String(drumVal));

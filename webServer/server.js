@@ -35,7 +35,7 @@ var player = Omx('clap.wav');
 // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
-  if (data == 'drum1' && !isPlaying) {
+  if (data == 'drum1' && !player.running) {
     // io.emit('drum1');
 	// Import the module. 
 	 
@@ -45,10 +45,11 @@ parser.on('data', data => { // on data from the arduino
 	player.play();
 	// player.volUp();
 	isPlaying = true;
-  } else {
-	player.rewind();
-  	isPlaying = false;
   }
+ //   else {
+	// player.rewind();
+ //  	isPlaying = false;
+ //  }
 });
 //----------------------------------------------------------------------------//
 

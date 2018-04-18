@@ -6,6 +6,7 @@ var io = require('socket.io')(http); // connect websocket library to server
 var serverPort = 8000;
 var serialPort = require('serialport'); // serial library
 var readLine = serialPort.parsers.Readline; // read serial data as lines
+var Omx = require('node-omxplayer');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -34,8 +35,15 @@ serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     // io.emit('drum1');
-    var audio = new Audio('clap.wav');
-	audio.play();
+	// Import the module. 
+	 
+	// Create an instance of the player with the source. 
+	var player = Omx('clap.wav');
+	 
+	// Control video/audio playback. 
+	player.play();
+	// player.volUp();
+	// player.quit();
   }
 });
 //----------------------------------------------------------------------------//

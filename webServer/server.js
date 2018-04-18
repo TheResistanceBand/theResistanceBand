@@ -33,7 +33,7 @@ const parser = new readLine({
 // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
-  if (data == 'drum1' && !player.running) {
+  if (data == 'drum1') {
     // io.emit('drum1');
 	// Import the module. 
 	 

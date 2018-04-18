@@ -32,8 +32,9 @@ const parser = new readLine({
 // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', function(data) { // on data from the arduino
-  if (+data.substring(8) > 20) {
-	  console.log(data);
+  if (+data.substring(7) > 20) {
+    console.log(data);
+    io.emit('drum1');
   }
 });
 //----------------------------------------------------------------------------//

@@ -29,8 +29,6 @@ const serial = new serialPort('/dev/ttyUSB0', {
 const parser = new readLine({
   delimiter: '\r\n'
 });
-var isPlaying = false;
-var player = Omx('clap.wav');
 
 // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -42,9 +40,9 @@ parser.on('data', data => { // on data from the arduino
 	// Create an instance of the player with the source. 
 	 
 	// Control video/audio playback. 
+	var player = Omx('clap.wav');
 	player.play();
 	// player.volUp();
-	isPlaying = true;
   }
  //   else {
 	// player.rewind();

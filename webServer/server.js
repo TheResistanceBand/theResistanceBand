@@ -33,9 +33,9 @@ const parser = new readLine({
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
-    console.log(data);
-    isPlaying = true;
-    io.emit('drum1');
+    // io.emit('drum1');
+    var audio = new Audio('clap.wav');
+	audio.play();
   }
 });
 //----------------------------------------------------------------------------//

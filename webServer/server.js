@@ -39,7 +39,7 @@ parser.on('data', function(data) { // on data from the arduino
     io.emit('drum1');
   } else {
     console.log('under 20');
-    isPlaying = false;
+    // isPlaying = false;
   }
 });
 //----------------------------------------------------------------------------//

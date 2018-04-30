@@ -1,0 +1,106 @@
+* { box-sizing: border-box; }
+html { margin: 0; padding: 0; }
+body {
+    margin: 0;
+    padding: 0;
+    background: #2A2A36;
+    font-family: "Fugaz One";
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Monoton;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.header {
+  height: 120px;
+}
+
+#logo {
+  position: absolute;
+  top: 25px;
+  left: 10%;
+  margin: 0;
+}
+
+#record {
+  position: absolute;
+  right: 10%;
+  top: 20px;
+}
+
+
+.btn {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  background: #F2F2F2;
+  outline: none;
+  border: none;
+  border-radius: 40px;
+  font-size: 70px;
+  padding: 0;
+  margin: 0;
+  color: #FF5A64;
+}
+
+.drum-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  /* outline: 1px dotted #f7f7f7; */
+  margin: 4rem auto;
+}
+
+.drum-pad {
+  background: #828291;
+}
+
+#drum1 {
+  width: 400px;
+  height: 400px; 
+  line-height: 400px;
+  border-radius: 200px;
+}
+
+#drum2 {
+  width: 300px;
+  height: 300px; 
+  line-height: 300px;
+  border-radius: 150px;
+}
+
+#drum3 {
+  width: 250px;
+  height: 250px; 
+  line-height: 250px;
+  border-radius: 125px;
+}
+
+#drum4 {
+  width: 300px;
+  height: 300px; 
+  line-height: 300px;
+  border-radius: 150px;
+}
+
+.thermin-container {
+  display: flex;
+  justify-content: space-between;
+  width: 33%;
+  position: relative;
+  left: 10%;
+  margin-top: 2rem;
+}
+
+select {
+  font-size: 32px;
+  color: #fff;
+  background: #828291;
+  border: none;
+  padding: 10px;
+}

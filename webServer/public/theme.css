@@ -65,6 +65,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 400px; 
   line-height: 400px;
   border-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #drum2 {
@@ -72,6 +75,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 300px; 
   line-height: 300px;
   border-radius: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #drum3 {
@@ -79,13 +85,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 250px; 
   line-height: 250px;
   border-radius: 125px;
-}
-
-#drum4 {
-  width: 300px;
-  height: 300px; 
-  line-height: 300px;
-  border-radius: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .theremin-container {

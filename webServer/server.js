@@ -31,15 +31,15 @@ http.listen(serverPort, function() {
 // });
 
 let drumHash = {
-  drum1A: '/drum-sounds/drum1-a.wav',
-  drum1B: '/drum-sounds/drum1-b.wav',
-  drum1C: '/drum-sounds/drum1-c.wav',
-  drum2A: '/drum-sounds/drum2-a.wav',
-  drum2B: '/drum-sounds/drum2-b.wav',
-  drum2C: '/drum-sounds/drum2-c.wav',
-  drum3A: '/drum-sounds/drum3-a.wav',
-  drum3B: '/drum-sounds/drum3-b.wav',
-  drum3C: '/drum-sounds/drum3-c.wav',
+  a1: '/drum-sounds/drum1-a.wav',
+  b1: '/drum-sounds/drum1-b.wav',
+  c1: '/drum-sounds/drum1-c.wav',
+  a2: '/drum-sounds/drum2-a.wav',
+  b2: '/drum-sounds/drum2-b.wav',
+  c2: '/drum-sounds/drum2-c.wav',
+  a3: '/drum-sounds/drum3-a.wav',
+  b3: '/drum-sounds/drum3-b.wav',
+  c3: '/drum-sounds/drum3-c.wav',
 
 }
 

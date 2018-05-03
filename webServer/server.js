@@ -66,37 +66,37 @@ let flex = flexHash['a'];
 
 
 // // Read data that is available on the serial port and send it to the websocket
-// serial.pipe(parser);
-// parser.on('data', data => { // on data from the arduino
-//   if (data == 'drum1') {
-//     // io.emit('drum1');
-//     var player = Omx(drum1);
-//   }
-//   if (data == 'drum2') {
-//     // io.emit('drum1');
-//     var player = Omx(drum2);
-//   }
-//   if (data == 'drum3') {
-//     // io.emit('drum1');
-//     var player = Omx(drum3);
-//   }
-//   if (data == 'thereminLow') {
-//     // io.emit('drum1');
-//     var player = Omx(thereminLow);
-//   }
-//   if (data == 'thereminMid') {
-//     // io.emit('drum1');
-//     var player = Omx(thereminMid);
-//   }
-//   if (data == 'thereminHigh') {
-//     // io.emit('drum1');
-//     var player = Omx(thereminHigh);
-//   }
-//   if (data == 'flex') {
-//     // io.emit('drum1');
-//     var player = Omx(flex);
-//   }
-// });
+serial.pipe(parser);
+parser.on('data', data => { // on data from the arduino
+  if (data == 'drum1') {
+    // io.emit('drum1');
+    var player = Omx(drum1);
+  }
+  if (data == 'drum2') {
+    // io.emit('drum1');
+    var player = Omx(drum2);
+  }
+  if (data == 'drum3') {
+    // io.emit('drum1');
+    var player = Omx(drum3);
+  }
+  if (data == 'thereminLow') {
+    // io.emit('drum1');
+    var player = Omx(thereminLow);
+  }
+  if (data == 'thereminMid') {
+    // io.emit('drum1');
+    var player = Omx(thereminMid);
+  }
+  if (data == 'thereminHigh') {
+    // io.emit('drum1');
+    var player = Omx(thereminHigh);
+  }
+  if (data == 'flex') {
+    // io.emit('drum1');
+    var player = Omx(flex);
+  }
+});
 //----------------------------------------------------------------------------//
 
 

@@ -30,14 +30,39 @@ http.listen(serverPort, function() {
 //   delimiter: '\r\n'
 // });
 
+let drumHash = {
+  drum1A: '/drum-sounds/drum1-a.wav',
+  drum1B: '/drum-sounds/drum1-b.wav',
+  drum1C: '/drum-sounds/drum1-c.wav',
+  drum2A: '/drum-sounds/drum2-a.wav',
+  drum2B: '/drum-sounds/drum2-b.wav',
+  drum2C: '/drum-sounds/drum2-c.wav',
+  drum3A: '/drum-sounds/drum3-a.wav',
+  drum3B: '/drum-sounds/drum3-b.wav',
+  drum3C: '/drum-sounds/drum3-c.wav',
+
+}
+
+let thereminHash = {
+  a: '/thermin-sounds/thermin-a.wav',
+  b: '/thermin-sounds/thermin-b.wav',
+  c: '/thermin-sounds/thermin-c.wav',
+}
+
+let flexHash = {
+  a: '/flex-sounds/flex1.wav',
+  b: '/flex-sounds/flex2.wav',
+}
+
+
 //drum variables
-let drum1 = 'clap.wav';
-let drum2 = 'clap.wav';
-let drum3 = 'clap.wav';
-let thereminLow = 'clap.wav';
-let thereminMid = 'clap.wav';
-let thereminHigh = 'clap.wav';
-let flex = 'clap.wav';
+let drum1 = drumHash['drum1A'];
+let drum2 = drumHash['drum2A'];
+let drum3 = drumHash['drum3A'];
+let thereminLow = thereminHash['a'];
+let thereminMid = thereminHash['b'];
+let thereminHigh = thereminHash['c'];
+let flex = flexHash['a'];
 
 
 // // Read data that is available on the serial port and send it to the websocket
@@ -91,10 +116,12 @@ io.on('connect', socket => {
     console.log('user disconnected');
   });
 
-  socket.on('thereminLowChange', val => thereminLow = val);
-  socket.on('thereminMidChange', val => thereminMid = val);
-  socket.on('thereminHighChange', val => thereminHigh = val);
-  socket.on('drum1Change', val => drum1 = val);
-  socket.on('drum2Change', val => drum2 = val);
-  socket.on('drum3Change', val => drum3 = val);
-  socket.on('flexChange', val => flex = val);
+  socket.on('thereminLowChange', val => thereminLow = thereminHash[val]);
+  socket.on('thereminMidChange', val => thereminMid = thereminHash[val]);
+  socket.on('thereminHighChange', val => thereminHigh = thereminHash[val]);
+  socket.on('drum1Change', val => drum1 = drumHash[val]);
+  socket.on('drum2Change', val => drum2 = drumHash[val]);
+  socket.on('drum3Change', val => drum3 = drumHash[val]);
+  socket.on('flexChange', val => flex = flexHash[val]);
+
+});

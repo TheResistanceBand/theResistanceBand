@@ -6,16 +6,36 @@ socket.on('drum1', function() {
 });
 
 $('#theremin-low').on('change', e => {
-	socket.emit('thereminLowChange', e.target.value);
-	console.log(e.target.value)
+    socket.emit('thereminLowChange', e.target.value);
+    console.log(e.target.value)
 });
 
 $('#theremin-mid').on('change', e => {
-	socket.emit('thereminMidChange', e.target.value);
-	console.log(e.target.value)
+    socket.emit('thereminMidChange', e.target.value);
+    console.log(e.target.value)
 });
 
 $('#theremin-high').on('change', e => {
-	socket.emit('thereminHighChange', e.target.value);
-	console.log(e.target.value)
+    socket.emit('thereminHighChange', e.target.value);
+    console.log(e.target.value)
+});
+
+$('#drum1').on('change', e => {
+    socket.emit('drum1Change', e.target.value);
+    console.log(e.target.value)
+});
+
+$('#drum2').on('change', e => {
+    socket.emit('drum2Change', e.target.value);
+    console.log(e.target.value)
+});
+
+$('#drum3').on('change', e => {
+    socket.emit('drum3Change', e.target.value);
+    console.log(e.target.value)
+});
+
+$('#flex').on('change', e => {
+    socket.emit('flexChange', e.target.value);
+    console.log(e.target.value)
 });

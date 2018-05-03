@@ -116,12 +116,33 @@ io.on('connect', socket => {
     console.log('user disconnected');
   });
 
-  socket.on('thereminLowChange', val => thereminLow = thereminHash[val]);
-  socket.on('thereminMidChange', val => thereminMid = thereminHash[val]);
-  socket.on('thereminHighChange', val => thereminHigh = thereminHash[val]);
-  socket.on('drum1Change', val => drum1 = drumHash[val]);
-  socket.on('drum2Change', val => drum2 = drumHash[val]);
-  socket.on('drum3Change', val => drum3 = drumHash[val]);
-  socket.on('flexChange', val => flex = flexHash[val]);
+  socket.on('thereminLowChange', val => {
+    thereminLow = thereminHash[val];
+    var player = Omx(thereminLow);
+  });
+  socket.on('thereminMidChange', val => {
+    thereminMid = thereminHash[val];
+    var player = Omx(thereminMid);
+  });
+  socket.on('thereminHighChange', val => {
+    thereminHigh = thereminHash[val];
+    var player = Omx(thereminHigh);
+  });
+  socket.on('drum1Change', val => {
+    drum1 = drumHash[val];
+    var player = Omx(drum1);
+  });
+  socket.on('drum2Change', val => {
+    drum2 = drumHash[val];
+    var player = Omx(drum2);
+  });
+  socket.on('drum3Change', val => {
+    drum3 = drumHash[val];
+    var player = Omx(drum3);
+  });
+  socket.on('flexChange', val => {
+    flex = flexHash[val];
+    var player = Omx(flex);
+  });
 
 });

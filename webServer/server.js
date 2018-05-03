@@ -31,27 +31,27 @@ http.listen(serverPort, function() {
 // });
 
 let drumHash = {
-  a1: '/drum-sounds/drum1-a.wav',
-  b1: '/drum-sounds/drum1-b.wav',
-  c1: '/drum-sounds/drum1-c.wav',
-  a2: '/drum-sounds/drum2-a.wav',
-  b2: '/drum-sounds/drum2-b.wav',
-  c2: '/drum-sounds/drum2-c.wav',
-  a3: '/drum-sounds/drum3-a.wav',
-  b3: '/drum-sounds/drum3-b.wav',
-  c3: '/drum-sounds/drum3-c.wav',
+  a1: './drum-sounds/drum1-a.wav',
+  b1: './drum-sounds/drum1-b.wav',
+  c1: './drum-sounds/drum1-c.wav',
+  a2: './drum-sounds/drum2-a.wav',
+  b2: './drum-sounds/drum2-b.wav',
+  c2: './drum-sounds/drum2-c.wav',
+  a3: './drum-sounds/drum3-a.wav',
+  b3: './drum-sounds/drum3-b.wav',
+  c3: './drum-sounds/drum3-c.wav',
 
 }
 
 let thereminHash = {
-  a: '/thermin-sounds/thermin-a.wav',
-  b: '/thermin-sounds/thermin-b.wav',
-  c: '/thermin-sounds/thermin-c.wav',
+  a: './thermin-sounds/thermin-a.wav',
+  b: './thermin-sounds/thermin-b.wav',
+  c: './thermin-sounds/thermin-c.wav',
 }
 
 let flexHash = {
-  a: '/flex-sounds/flex1.wav',
-  b: '/flex-sounds/flex2.wav',
+  a: './flex-sounds/flex1.wav',
+  b: './flex-sounds/flex2.wav',
 }
 
 

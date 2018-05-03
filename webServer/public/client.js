@@ -5,6 +5,17 @@ socket.on('drum1', function() {
   audio.play();
 });
 
-$('#theremin-low').on('change', e => console.log(e.target.value));
-$('#theremin-mid').on('change', e => console.log(e.target.value));
-$('#theremin-high').on('change', e => console.log(e.target.value));
+$('#theremin-low').on('change', e => {
+	socket.emit('thereminLowChange', e.target.value);
+	console.log(e.target.value)
+});
+
+$('#theremin-mid').on('change', e => {
+	socket.emit('thereminMidChange', e.target.value);
+	console.log(e.target.value)
+});
+
+$('#theremin-high').on('change', e => {
+	socket.emit('thereminHighChange', e.target.value);
+	console.log(e.target.value)
+});

@@ -30,12 +30,14 @@ http.listen(serverPort, function() {
 //   delimiter: '\r\n'
 // });
 
-// //drum variables
-// const drum1 = 'clap.wav';
-// const drum2 = 'clap.wav';
-// const drum3 = 'clap.wav';
-// const theramin = 'clap.wav';
-// const flex = 'clap.wav';
+//drum variables
+let drum1 = 'clap.wav';
+let drum2 = 'clap.wav';
+let drum3 = 'clap.wav';
+let thereminLow = 'clap.wav';
+let thereminMid = 'clap.wav';
+let thereminHigh = 'clap.wav';
+let flex = 'clap.wav';
 
 
 // // Read data that is available on the serial port and send it to the websocket
@@ -53,9 +55,17 @@ http.listen(serverPort, function() {
 //     // io.emit('drum1');
 //     var player = Omx(drum3);
 //   }
-//   if (data == 'theramin') {
+//   if (data == 'thereminLow') {
 //     // io.emit('drum1');
-//     var player = Omx(theramin);
+//     var player = Omx(thereminLow);
+//   }
+//   if (data == 'thereminMid') {
+//     // io.emit('drum1');
+//     var player = Omx(thereminMid);
+//   }
+//   if (data == 'thereminHigh') {
+//     // io.emit('drum1');
+//     var player = Omx(thereminHigh);
 //   }
 //   if (data == 'flex') {
 //     // io.emit('drum1');
@@ -68,16 +78,23 @@ http.listen(serverPort, function() {
 //---------------------- WEBSOCKET COMMUNICATION -----------------------------//
 // this is the websocket event handler and say if someone connects
 // as long as someone is connected, listen for messages
-io.on('connect', function(socket) {
+io.on('connect', socket => {
   console.log('a user connected');
   io.emit('reset'); // call reset to make sure the website is clean
 
 // if you get the 'disconnect' message, say the user disconnected
-  io.on('disconnect', function() {
+  io.on('disconnect', () => {
     console.log('user disconnected');
   });
 
-  socket.on('disconnect', function() { // This function  gets called when the browser window gets closed
+  socket.on('disconnect', () => { // This function  gets called when the browser window gets closed
     console.log('user disconnected');
   });
-});
+
+  socket.on('thereminLowChange', val => thereminLow = val);
+  socket.on('thereminMidChange', val => thereminMid = val);
+  socket.on('thereminHighChange', val => thereminHigh = val);
+  socket.on('drum1Change', val => drum1 = val);
+  socket.on('drum2Change', val => drum2 = val);
+  socket.on('drum3Change', val => drum3 = val);
+  socket.on('flexChange', val => flex = val);

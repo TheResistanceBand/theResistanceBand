@@ -30,17 +30,36 @@ const parser = new readLine({
   delimiter: '\r\n'
 });
 
+//drum variables
+const drum1 = 'clap.wav';
+const drum2 = 'clap.wav';
+const drum3 = 'clap.wav';
+const theramin = 'clap.wav';
+const flex = 'clap.wav';
+
+
 // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     // io.emit('drum1');
-	// Import the module. 
-	 
-	// Create an instance of the player with the source. 
-	 
-	// Control video/audio playback. 
-	var player = Omx('clap.wav');
+    var player = Omx(drum1);
+  }
+  if (data == 'drum2') {
+    // io.emit('drum1');
+    var player = Omx(drum2);
+  }
+  if (data == 'drum3') {
+    // io.emit('drum1');
+    var player = Omx(drum3);
+  }
+  if (data == 'theramin') {
+    // io.emit('drum1');
+    var player = Omx(theramin);
+  }
+  if (data == 'flex') {
+    // io.emit('drum1');
+    var player = Omx(flex);
   }
 });
 //----------------------------------------------------------------------------//

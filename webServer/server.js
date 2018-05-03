@@ -22,13 +22,13 @@ http.listen(serverPort, function() {
 
 //---------------------- SERIAL COMMUNICATION --------------------------------//
 // start the serial port connection and read on newlines
-// const serial = new serialPort('/dev/ttyUSB0', {
-//  baudRate:9600
+const serial = new serialPort('/dev/ttyUSB0', {
+ baudRate:9600
 
-// });
-// const parser = new readLine({
-//   delimiter: '\r\n'
-// });
+});
+const parser = new readLine({
+  delimiter: '\r\n'
+});
 
 let drumHash = {
   a1: './drum-sounds/drum1-a.wav',

@@ -209,11 +209,11 @@ io.on('connect', socket => {
   });
 
   socket.on('record', val => {
-    if (val == 'start' && micStatus = 'off') {
+    if (val == 'start' && micStatus == 'off') {
       micInstance.start();
-    } else if (val  == 'stop' && micStatus = 'on') {
+    } else if (val  == 'stop' && micStatus == 'on') {
       micInstance.stop();
-    } else if (val == 'play' && micStatus = 'off') {
+    } else if (val == 'play' && micStatus == 'off') {
       micPlayer = Omx('output.wav');
     }
   })

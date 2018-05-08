@@ -172,7 +172,7 @@ io.on('connect', socket => {
        
       let outputFileStream = fs.WriteStream('output.wav');
 
-      let micStatus = 'off';
+      let micStatus = 'on';
        
       micInputStream.pipe(outputFileStream);
        

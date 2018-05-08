@@ -98,7 +98,7 @@ var micInstance = mic({
 });
 var micInputStream = micInstance.getAudioStream();
  
-var outputFileStream = fs.WriteStream('output.raw');
+var outputFileStream = fs.WriteStream('output.wav');
  
 micInputStream.pipe(outputFileStream);
  

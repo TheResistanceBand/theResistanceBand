@@ -35,8 +35,8 @@ void loop() {
   flexVal = analogRead(flexPin);
   
   if (drum1Val > 200 && !isDrum1Playing) {
-    Serial.println("drum1");
     isDrum1Playing = true;
+    Serial.println("drum1");
   } else if (drum1Val < 10 && isDrum1Playing) {
     isDrum1Playing = false;
   }
@@ -55,18 +55,18 @@ void loop() {
 //    isDrum3Playing = false;
 //  }
 //
-//  if (theraminVal > 100 && !isPlaying) {
-//    Serial.println("theramin");
+//  if (thereminVal > 100 && !isPlaying) {
+//    Serial.println("theremin");
 //    isPlaying = true;
-//  } else if (theraminVal < 20 && isPlaying) {
+//  } else if (thereminVal < 20 && isPlaying) {
 //    isPlaying = false;
 //  }
 
 
-//  if (flexVal > 100 && !isPlaying) {
-//    Serial.println("flex");
-//    isPlaying = true;
-//  } else if (flexVal < 20 && isPlaying) {
-//    isPlaying = false;
-//  }
+  if (flexVal > 500 && !isFlexPlaying) {
+    isFlexPlaying = true;
+    Serial.println(flexVal);
+  } else if (flexVal < 490 && isFlexPlaying) {
+    isFlexPlaying = false;
+  }
 }

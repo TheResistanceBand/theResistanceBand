@@ -1,9 +1,9 @@
 // Define potentiometer pin
 #define drum1Pin A0
-#define drum2Pin A4
+#define drum2Pin A1
 #define drum3Pin A2
-#define thereminPin A3
-#define flexPin A1
+#define thereminPin A4
+#define flexPin A3
 
 // Program variables
 int drum1Val = 0;
@@ -40,13 +40,13 @@ void loop() {
   } else if (drum1Val < 10 && isDrum1Playing) {
     isDrum1Playing = false;
   }
-//
-//  if (drum2Val > 200 && !isDrum2Playing) {
-//    Serial.println("drum2");
-//    isDrum2Playing = true;
-//  } else if (drum2Val < 10 && isDrum2Playing) {
-//    isDrum2Playing = false;
-//  }
+
+  if (drum2Val > 200 && !isDrum2Playing) {
+    Serial.println("drum2");
+    isDrum2Playing = true;
+  } else if (drum2Val < 10 && isDrum2Playing) {
+    isDrum2Playing = false;
+  }
 
 //  if (drum3Val > 200 && !isDrum3Playing) {
 //    Serial.println("drum3");

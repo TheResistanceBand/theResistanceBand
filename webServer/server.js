@@ -135,6 +135,7 @@ parser.on('data', data => { // on data from the arduino
     // io.emit('drum1');
     if (flexPlayer && flexPlayer.running) {
       flexPlayer.quit();
+      flexPlayer = Omx(flex);
     } else {
       flexPlayer = Omx(flex);
     }

@@ -7,7 +7,6 @@ var serverPort = 8000;
 var serialPort = require('serialport'); // serial library
 var readLine = serialPort.parsers.Readline; // read serial data as lines
 var Omx = require('node-omxplayer');
-var Sound = require('node-arecord');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -73,19 +72,65 @@ let thereminHighPlayer;
 let flexPlayer;
 let songPlayer;
 
-var sound = new Sound({
- debug: true,    // Show stdout
- destination_folder: '/recordings',
- filename: 'recording.wav',
- alsa_format: 'dat',
- alsa_device: 'hw:1,0'
-});
+// var mic = require('mic');
+// var fs = require('fs');
+ 
+// var micInstance = mic({
+//     rate: '16000',
+//     channels: '1',
+//     debug: true,
+//     exitOnSilence: 6
+// });
+// var micInputStream = micInstance.getAudioStream();
+ 
+// var outputFileStream = fs.WriteStream('output.wav');
+ 
+// micInputStream.pipe(outputFileStream);
+ 
+// micInputStream.on('data', function(data) {
+//     console.log("Recieved Input Stream: " + data.length);
+// });
+ 
+// micInputStream.on('error', function(err) {
+//     cosole.log("Error in Input Stream: " + err);
+// });
+ 
+// micInputStream.on('startComplete', function() {
+//     console.log("Got SIGNAL startComplete");
+//     setTimeout(function() {
+//             micInstance.pause();
+//     }, 5000);
+// });
+    
+// micInputStream.on('stopComplete', function() {
+//     console.log("Got SIGNAL stopComplete");
+// });
+    
+// micInputStream.on('pauseComplete', function() {
+//     console.log("Got SIGNAL pauseComplete");
+//     setTimeout(function() {
+//         micInstance.resume();
+//     }, 5000);
+// });
+ 
+// micInputStream.on('resumeComplete', function() {
+//     console.log("Got SIGNAL resumeComplete");
+//     setTimeout(function() {
+//         micInstance.stop();
+//         let micPlayer = Omx('output.wav');
+//     }, 5000);
+// });
+ 
+// micInputStream.on('silence', function() {
+//     console.log("Got SIGNAL silence");
+// });
+ 
+// micInputStream.on('processExitComplete', function() {
+//     console.log("Got SIGNAL processExitComplete");
+// });
+ 
+// micInstance.start();
 
-sound.record();
-setTimeout(() => {
-    sound.stop(); // stop after ten seconds
-    songPlayer = Omx('./recordings/recording.wav');
-}, 3000);
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -129,12 +174,7 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'flex') {
     console.log('flex')
     // io.emit('drum1');
-    if (flexPlayer && flexPlayer.running) {
-      flexPlayer.quit();
-      flexPlayer = Omx(flex);
-    } else {
-      flexPlayer = Omx(flex);
-    }
+    flexPlayer = Omx(flex);
   }
 });
 //----------------------------------------------------------------------------//
@@ -155,6 +195,31 @@ io.on('connect', socket => {
   socket.on('disconnect', () => { // This function  gets called when the browser window gets closed
     console.log('user disconnected');
   });
+
+  socket.on('play-song', val => {
+    if (val === 1) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song1.mp3')
+    } else if (val === 2) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song2.mp3')
+    } else if (val === 3) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song3.mp3')
+    }
+  });
+
+  socket.on('stop-song', () => {
+    if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+    }
+  })
 
   socket.on('thereminLowChange', val => {
     thereminLow = thereminHash[val];

@@ -2,16 +2,21 @@
 #define drum1Pin A0
 #define drum2Pin A4
 #define drum3Pin A2
-#define theraminPin A3
+#define thereminPin A3
 #define flexPin A1
 
 // Program variables
 int drum1Val = 0;
 int drum2Val = 0;
 int drum3Val = 0;
-int theraminVal = 0;
+int thereminVal = 0;
 int flexVal = 0;
-bool isPlaying = false;
+bool isDrum1Playing = false;
+bool isDrum2Playing = false;
+bool isDrum3Playing = false;
+bool isThereminPlaying = false;
+bool isFlexPlaying = false;
+
 
 
 void setup() {
@@ -26,31 +31,28 @@ void loop() {
   drum1Val = analogRead(drum1Pin);
   drum2Val = analogRead(drum2Pin);
   drum3Val = analogRead(drum3Pin);
-  theraminVal = analogRead(theraminPin);
+  thereminVal = analogRead(thereminPin);
   flexVal = analogRead(flexPin);
-  if (drum1Val > 10) {
-    Serial.println(drum1Val);  
-  }
   
-  if (drum1Val > 100 && !isPlaying) {
+  if (drum1Val > 200 && !isDrum1Playing) {
     Serial.println("drum1");
-    isPlaying = true;
-  } else if (drum1Val < 10 && isPlaying) {
-    isPlaying = false;
+    isDrum1Playing = true;
+  } else if (drum1Val < 10 && isDrum1Playing) {
+    isDrum1Playing = false;
   }
 //
-//  if (drum2Val > 100 && !isPlaying) {
+//  if (drum2Val > 200 && !isDrum2Playing) {
 //    Serial.println("drum2");
-//    isPlaying = true;
-//  } else if (drum2Val < 20 && isPlaying) {
-//    isPlaying = false;
+//    isDrum2Playing = true;
+//  } else if (drum2Val < 10 && isDrum2Playing) {
+//    isDrum2Playing = false;
 //  }
 
-//  if (drum3Val > 100 && !isPlaying) {
+//  if (drum3Val > 200 && !isDrum3Playing) {
 //    Serial.println("drum3");
-//    isPlaying = true;
-//  } else if (drum3Val < 20 && isPlaying) {
-//    isPlaying = false;
+//    isDrum3Playing = true;
+//  } else if (drum3Val < 10 && isDrum3Playing) {
+//    isDrum3Playing = false;
 //  }
 //
 //  if (theraminVal > 100 && !isPlaying) {
@@ -67,8 +69,4 @@ void loop() {
 //  } else if (flexVal < 20 && isPlaying) {
 //    isPlaying = false;
 //  }
-
-  //Serial.println("Value: "+String(drumVal));
-//  lcd.cle ar();
-//  lcd.print("Value: "+String(drumVal));
 }

@@ -72,64 +72,59 @@ let thereminHighPlayer;
 let flexPlayer;
 let songPlayer;
 
-// var mic = require('mic');
-// var fs = require('fs');
+let mic = require('mic');
+let fs = require('fs');
  
-// var micInstance = mic({
-//     rate: '16000',
-//     channels: '1',
-//     debug: true,
-//     exitOnSilence: 6
-// });
-// var micInputStream = micInstance.getAudioStream();
+let micInstance = mic({
+    rate: '16000',
+    channels: '1',
+    debug: true,
+    exitOnSilence: 6
+});
+let micInputStream = micInstance.getAudioStream();
  
-// var outputFileStream = fs.WriteStream('output.wav');
+let outputFileStream = fs.WriteStream('output.wav');
+
+let micStatus = 'off';
  
-// micInputStream.pipe(outputFileStream);
+micInputStream.pipe(outputFileStream);
  
-// micInputStream.on('data', function(data) {
-//     console.log("Recieved Input Stream: " + data.length);
-// });
+micInputStream.on('data', function(data) {
+    console.log("Recieved Input Stream: " + data.length);
+});
  
-// micInputStream.on('error', function(err) {
-//     cosole.log("Error in Input Stream: " + err);
-// });
+micInputStream.on('error', function(err) {
+    cosole.log("Error in Input Stream: " + err);
+});
  
-// micInputStream.on('startComplete', function() {
-//     console.log("Got SIGNAL startComplete");
-//     setTimeout(function() {
-//             micInstance.pause();
-//     }, 5000);
-// });
+micInputStream.on('startComplete', function() {
+    console.log("Got SIGNAL startComplete");
+    micStatus = 'on';
+});
     
-// micInputStream.on('stopComplete', function() {
-//     console.log("Got SIGNAL stopComplete");
-// });
+micInputStream.on('stopComplete', function() {
+    console.log("Got SIGNAL stopComplete");
+    micStatus = 'off';
+});
     
-// micInputStream.on('pauseComplete', function() {
-//     console.log("Got SIGNAL pauseComplete");
-//     setTimeout(function() {
-//         micInstance.resume();
-//     }, 5000);
-// });
+micInputStream.on('pauseComplete', function() {
+    console.log("Got SIGNAL pauseComplete");
+    micStatus = 'pause'
+});
  
-// micInputStream.on('resumeComplete', function() {
-//     console.log("Got SIGNAL resumeComplete");
-//     setTimeout(function() {
-//         micInstance.stop();
-//         let micPlayer = Omx('output.wav');
-//     }, 5000);
-// });
+micInputStream.on('resumeComplete', function() {
+  console.log("Got SIGNAL resumeComplete");
+  micStatus = 'on'
+});
  
-// micInputStream.on('silence', function() {
-//     console.log("Got SIGNAL silence");
-// });
+micInputStream.on('silence', function() {
+    console.log("Got SIGNAL silence");
+});
  
-// micInputStream.on('processExitComplete', function() {
-//     console.log("Got SIGNAL processExitComplete");
-// });
+micInputStream.on('processExitComplete', function() {
+    console.log("Got SIGNAL processExitComplete");
+});
  
-// micInstance.start();
 
 
 // // Read data that is available on the serial port and send it to the websocket
@@ -137,15 +132,7 @@ serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
-    // io.emit('drum1');
-    // if (songPlayer && songPlayer.running) {
-    // if (drum1Player && drum1Player.running) {
-    //   drum1Player.quit();
-    //   // songPlayer.quit();
-    // } else {
-      // drum1Player = Omx('./songs/song1.mp3');
-      drum1Player = Omx(drum1);
-    // }
+    drum1Player = Omx(drum1);
   }
   if (data == 'drum2') {
     console.log('drum2')
@@ -218,6 +205,16 @@ io.on('connect', socket => {
   socket.on('stop-song', () => {
     if (songPlayer && songPlayer.running) {
         songPlayer.quit();
+    }
+  });
+
+  socket.on('record', val => {
+    if (val == 'start' && micStatus = 'off') {
+      micInstance.start();
+    } else if (val  == 'stop' && micStatus = 'on') {
+      micInstance.stop();
+    } else if (val == 'play' && micStatus = 'off') {
+      micPlayer = Omx('output.wav');
     }
   })
 

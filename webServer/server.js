@@ -87,8 +87,8 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');
-    if (songPlayer && songPlayer.running) {
-    // if (drum1Player && drum1Player.running) {
+    // if (songPlayer && songPlayer.running) {
+    if (drum1Player && drum1Player.running) {
       drum1Player.quit();
       // songPlayer.quit();
     } else {
@@ -97,7 +97,8 @@ parser.on('data', data => { // on data from the arduino
       //     sound.stop(); // stop after ten seconds
       //     songPlayer = Omx('./recordings/recording.wav');
       // }, 3000);
-      drum1Player = Omx('./songs/song1.mp3');
+      // drum1Player = Omx('./songs/song1.mp3');
+      drum1Player = Omx(drum1);
     }
   }
   if (data == 'drum2') {
@@ -106,7 +107,7 @@ parser.on('data', data => { // on data from the arduino
     if (drum2Player && drum2Player.running) {
       drum2Player.quit();
     } else {
-      drum2Player = Omx('./songs/song1.mp3');
+      drum2Player = Omx(drum2);
     }
   }
   if (data == 'drum3') {

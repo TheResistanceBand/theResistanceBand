@@ -73,19 +73,79 @@ let thereminHighPlayer;
 let flexPlayer;
 let songPlayer;
 
-var sound = new Sound({
- // debug: true,    // Show stdout
- destination_folder: './recordings',
- filename: 'recording.wav',
- alsa_format: 'dat',
- alsa_device: 'hw:1,0'
-});
+// var sound = new Sound({
+//  // debug: true,    // Show stdout
+//  destination_folder: './recordings',
+//  filename: 'recording.wav',
+//  alsa_format: 'dat',
+//  alsa_device: 'hw:1,0'
+// });
 
-sound.record();
-setTimeout(() => {
-    sound.stop(); // stop after ten seconds
-    songPlayer = Omx('./recordings/recording.wav');
-}, 3000);
+// sound.record();
+// setTimeout(() => {
+//     sound.stop(); // stop after ten seconds
+//     songPlayer = Omx('./recordings/recording.wav');
+// }, 3000);
+
+var mic = require('mic');
+var fs = require('fs');
+ 
+var micInstance = mic({
+    rate: '16000',
+    channels: '1',
+    debug: true,
+    exitOnSilence: 6
+});
+var micInputStream = micInstance.getAudioStream();
+ 
+var outputFileStream = fs.WriteStream('output.raw');
+ 
+micInputStream.pipe(outputFileStream);
+ 
+micInputStream.on('data', function(data) {
+    console.log("Recieved Input Stream: " + data.length);
+});
+ 
+micInputStream.on('error', function(err) {
+    cosole.log("Error in Input Stream: " + err);
+});
+ 
+micInputStream.on('startComplete', function() {
+    console.log("Got SIGNAL startComplete");
+    setTimeout(function() {
+            micInstance.pause();
+    }, 5000);
+});
+    
+micInputStream.on('stopComplete', function() {
+    console.log("Got SIGNAL stopComplete");
+});
+    
+micInputStream.on('pauseComplete', function() {
+    console.log("Got SIGNAL pauseComplete");
+    setTimeout(function() {
+        micInstance.resume();
+    }, 5000);
+});
+ 
+micInputStream.on('resumeComplete', function() {
+    console.log("Got SIGNAL resumeComplete");
+    setTimeout(function() {
+        micInstance.stop();
+    }, 5000);
+});
+ 
+micInputStream.on('silence', function() {
+    console.log("Got SIGNAL silence");
+});
+ 
+micInputStream.on('processExitComplete', function() {
+    console.log("Got SIGNAL processExitComplete");
+});
+ 
+micInstance.start();
+
+micPlayer = Omx('output.raw');
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);

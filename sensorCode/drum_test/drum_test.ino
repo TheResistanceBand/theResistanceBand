@@ -64,8 +64,8 @@ void loop() {
 
 
   if (flexVal > 500 && !isFlexPlaying) {
+    Serial.println("flex");
     isFlexPlaying = true;
-    Serial.println(flexVal);
   } else if (flexVal < 490 && isFlexPlaying) {
     isFlexPlaying = false;
   }

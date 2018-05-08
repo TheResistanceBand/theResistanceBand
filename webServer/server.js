@@ -145,7 +145,6 @@ io.on('connect', socket => {
   });
   socket.on('flexChange', val => {
     flex = flexHash[val];
-    var player = Omx(flex);
   });
 
 });

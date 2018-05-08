@@ -77,6 +77,9 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');
+    if (drum1Player.running) {
+      drum1Player.quit();;
+    }
     drum1Player = Omx('./songs/song1.mp3');
     // drum1Player = Omx(drum1);
   }

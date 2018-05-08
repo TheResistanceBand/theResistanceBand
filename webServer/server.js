@@ -75,57 +75,8 @@ let songPlayer;
 let mic = require('mic');
 let fs = require('fs');
  
-let micInstance = mic({
-    rate: '16000',
-    channels: '1',
-    debug: true,
-    exitOnSilence: 6
-});
-let micInputStream = micInstance.getAudioStream();
+let micInstance;
  
-let outputFileStream = fs.WriteStream('output.wav');
-
-let micStatus = 'off';
- 
-micInputStream.pipe(outputFileStream);
- 
-micInputStream.on('data', function(data) {
-    console.log("Recieved Input Stream: " + data.length);
-});
- 
-micInputStream.on('error', function(err) {
-    cosole.log("Error in Input Stream: " + err);
-});
- 
-micInputStream.on('startComplete', function() {
-    console.log("Got SIGNAL startComplete");
-    micStatus = 'on';
-});
-    
-micInputStream.on('stopComplete', function() {
-    console.log("Got SIGNAL stopComplete");
-    micStatus = 'off';
-});
-    
-micInputStream.on('pauseComplete', function() {
-    console.log("Got SIGNAL pauseComplete");
-    micStatus = 'pause'
-});
- 
-micInputStream.on('resumeComplete', function() {
-  console.log("Got SIGNAL resumeComplete");
-  micStatus = 'on'
-});
- 
-micInputStream.on('silence', function() {
-    console.log("Got SIGNAL silence");
-});
- 
-micInputStream.on('processExitComplete', function() {
-    console.log("Got SIGNAL processExitComplete");
-});
- 
-
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -210,6 +161,55 @@ io.on('connect', socket => {
 
   socket.on('record', val => {
     if (val == 'start' && micStatus == 'off') {
+      micInstance = mic({
+          rate: '16000',
+          channels: '1',
+          debug: true,
+          exitOnSilence: 6
+      });
+      let micInputStream = micInstance.getAudioStream();
+       
+      let outputFileStream = fs.WriteStream('output.wav');
+
+      let micStatus = 'off';
+       
+      micInputStream.pipe(outputFileStream);
+       
+      micInputStream.on('data', function(data) {
+          console.log("Recieved Input Stream: " + data.length);
+      });
+       
+      micInputStream.on('error', function(err) {
+          console.log("Error in Input Stream: " + err);
+      });
+       
+      micInputStream.on('startComplete', function() {
+          console.log("Got SIGNAL startComplete");
+          micStatus = 'on';
+      });
+          
+      micInputStream.on('stopComplete', function() {
+          console.log("Got SIGNAL stopComplete");
+          micStatus = 'off';
+      });
+          
+      micInputStream.on('pauseComplete', function() {
+          console.log("Got SIGNAL pauseComplete");
+          micStatus = 'pause'
+      });
+       
+      micInputStream.on('resumeComplete', function() {
+        console.log("Got SIGNAL resumeComplete");
+        micStatus = 'on'
+      });
+       
+      micInputStream.on('silence', function() {
+          console.log("Got SIGNAL silence");
+      });
+       
+      micInputStream.on('processExitComplete', function() {
+          console.log("Got SIGNAL processExitComplete");
+      });
       micInstance.start();
     } else if (val  == 'stop' && micStatus == 'on') {
       micInstance.stop();

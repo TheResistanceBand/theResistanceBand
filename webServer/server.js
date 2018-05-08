@@ -80,10 +80,10 @@ parser.on('data', data => { // on data from the arduino
     // io.emit('drum1');
     if (drum1Player && drum1Player.running) {
       micPlayer.quit();
-      drum1Player.quit();
+      // drum1Player.quit();
     } else {
       micPlayer = Omx();
-      drum1Player = Omx('./songs/song1.mp3');
+      // drum1Player = Omx('./songs/song1.mp3');
     }
     // drum1Player = Omx(drum1);
   }

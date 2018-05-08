@@ -76,6 +76,7 @@ let mic = require('mic');
 let fs = require('fs');
  
 let micInstance;
+let micStatus;
  
 
 // // Read data that is available on the serial port and send it to the websocket

@@ -23,8 +23,6 @@ bool isFlexPlaying = false;
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 
 void setup() {
-  // Set up the LCD's number of columns and rows
-  // lcd.begin(16, 2);
   // Setup serial monitor
    Serial.begin(9600);
    lox.begin();
@@ -51,13 +49,13 @@ void loop() {
     isDrum2Playing = false;
   }
 
-//  if (drum3Val > 200 && !isDrum3Playing) {
-//    Serial.println("drum3");
-//    isDrum3Playing = true;
-//  } else if (drum3Val < 10 && isDrum3Playing) {
-//    isDrum3Playing = false;
-//  }
-//
+  if (drum3Val > 200 && !isDrum3Playing) {
+    Serial.println("drum3");
+    isDrum3Playing = true;
+  } else if (drum3Val < 10 && isDrum3Playing) {
+    isDrum3Playing = false;
+  }
+
 //  if (thereminVal > 100 && !isPlaying) {
 //    Serial.println("theremin");
 //    isPlaying = true;
@@ -65,7 +63,6 @@ void loop() {
 //    isPlaying = false;
 //  }
 
-//  Serial.println(flexVal);
   if (flexVal < 300 && !isFlexPlaying) {
     Serial.println("flex");
     isFlexPlaying = true;

@@ -81,11 +81,11 @@ var sound = new Sound({
  alsa_device: 'hw:1,0'
 });
 
-sound.record();
-setTimeout(() => {
-    sound.stop(); // stop after ten seconds
-    songPlayer = Omx('./recordings/recording.wav');
-}, 3000);
+// sound.record();
+// setTimeout(() => {
+//     sound.stop(); // stop after ten seconds
+//     songPlayer = Omx('./recordings/recording.wav');
+// }, 3000);
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);

@@ -70,6 +70,7 @@ let thereminLowPlayer;
 let thereminMidPlayer;
 let thereminHighPlayer;
 let flexPlayer;
+let micPlayer;
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -78,9 +79,10 @@ parser.on('data', data => { // on data from the arduino
     console.log('drum1')
     // io.emit('drum1');
     if (drum1Player && drum1Player.running) {
-      drum1Player.quit();;
+      micPlayer.quit();
+      drum1Player.quit();
     } else {
-      var player = Omx();
+      micPlayer = Omx();
       drum1Player = Omx('./songs/song1.mp3');
     }
     // drum1Player = Omx(drum1);

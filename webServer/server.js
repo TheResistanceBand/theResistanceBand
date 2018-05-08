@@ -7,6 +7,7 @@ var serverPort = 8000;
 var serialPort = require('serialport'); // serial library
 var readLine = serialPort.parsers.Readline; // read serial data as lines
 var Omx = require('node-omxplayer');
+var Sound = require('node-arecord');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -63,6 +64,22 @@ let thereminMid = thereminHash['b'];
 let thereminHigh = thereminHash['c'];
 let flex = flexHash['a'];
 
+let drum1Player;
+let drum2Player;
+let drum3Player;
+let thereminLowPlayer;
+let thereminMidPlayer;
+let thereminHighPlayer;
+let flexPlayer;
+let songPlayer;
+
+var sound = new Sound({
+ debug: true,    // Show stdout
+ destination_folder: './recordings',
+ filename: 'recording.wav',
+ alsa_format: 'dat',
+ alsa_device: 'plughw:1,0'
+});
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -70,37 +87,48 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');
-    var player = Omx(drum1);
+    if (drum1Player && drum1Player.running) {
+      // drum1Player.quit();
+      songPlayer.quit();
+    } else {
+      sound.record();
+      setTimeout(function () {
+          sound.stop(); // stop after ten seconds
+          songPlayer = Omx('./recordings/recording.wav');
+      }, 3000);
+      // drum1Player = Omx('./songs/song1.mp3');
+    }
+    // drum1Player = Omx(drum1);
   }
   if (data == 'drum2') {
     // io.emit('drum1');
-    console.log('drum2')
-    var player = Omx(drum2);
+    console.log('drum2');
+    drum2Player = Omx(drum2);
   }
   if (data == 'drum3') {
     // io.emit('drum1');
     console.log('drum3')
-    var player = Omx(drum3);
+    drum3Player = Omx(drum3);
   }
   if (data == 'thereminLow') {
     // io.emit('drum1');
     console.log('thereminLow')
-    var player = Omx(thereminLow);
+    thereminLowPlayer = Omx(thereminLow);
   }
   if (data == 'thereminMid') {
     // io.emit('drum1');
     console.log('thereminMid')
-    var player = Omx(thereminMid);
+    thereminMidPlayer = Omx(thereminMid);
   }
   if (data == 'thereminHigh') {
     // io.emit('drum1');
     console.log('thereminHigh')
-    var player = Omx(thereminHigh);
+    thereminHighPlayer = Omx(thereminHigh);
   }
   if (data == 'flex') {
     // io.emit('drum1');
     console.log('flex')
-    var player = Omx(flex);
+    flexPlayer = Omx(flex);
   }
 });
 //----------------------------------------------------------------------------//

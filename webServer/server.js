@@ -215,6 +215,12 @@ io.on('connect', socket => {
     }
   });
 
+  socket.on('stop-song', () => {
+    if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+    }
+  })
+
   socket.on('thereminLowChange', val => {
     thereminLow = thereminHash[val];
     var player = Omx(thereminLow);

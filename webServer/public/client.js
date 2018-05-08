@@ -57,3 +57,8 @@ $('#song-3').on("click", e => {
   socket.emit('play-song', 3);
   console.log("Playing Song " + 3);
 });
+
+$('#song-stop').on("click", e => {
+  socket.emit('stop-song');
+  console.log("Stopping Song");
+});

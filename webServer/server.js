@@ -67,9 +67,6 @@ let flex = flexHash['a'];
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
-  console.log('!!!!!!');
-  console.log(data);
-  console.log('!!!!!!');
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');

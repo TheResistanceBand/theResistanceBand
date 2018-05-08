@@ -39,3 +39,21 @@ $('#flex').on('change', e => {
     socket.emit('flexChange', e.target.value);
     console.log(e.target.value)
 });
+
+
+
+$('#song-1').on("click", e => {
+  socket.emit('play-song', 1);
+  console.log("Playing Song " + 1);
+});
+
+$('#song-2').on("click", e => {
+  socket.emit('play-song', 2);
+  console.log("Playing Song " + 2);
+});
+
+
+$('#song-3').on("click", e => {
+  socket.emit('play-song', 3);
+  console.log("Playing Song " + 3);
+});

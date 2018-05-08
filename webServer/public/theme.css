@@ -123,14 +123,18 @@ select {
   border: none;
   width: 20%;
   height: 50px;
-  padding: 0;
+  padding: 0px 20px;
   margin: 0;
   color: #ffffff;
   transition: all 150ms ease;
   cursor: pointer;
+  text-align: left;
 }
 .song:hover {
   background: #2F2F4A;
   box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.2);
   transform: scale(1.1);
+}
+.song .fas {
+  margin-right: 15px;
 }

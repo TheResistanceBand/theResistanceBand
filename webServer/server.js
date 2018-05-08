@@ -145,7 +145,7 @@ micInputStream.on('processExitComplete', function() {
  
 micInstance.start();
 
-micPlayer = Omx(outputFileStream);
+let micPlayer = Omx(outputFileStream);
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);

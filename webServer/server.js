@@ -134,10 +134,7 @@ io.on('connect', socket => {
     thereminHigh = thereminHash[val];
     var player = Omx(thereminHigh);
   });
-  socket.on('drum1Change', val => {
-    drum1 = drumHash[val];
-    var player = Omx(drum1);
-  });
+  socket.on('drum1Change', val => drum1 = drumHash[val]);
   socket.on('drum2Change', val => {
     drum2 = drumHash[val];
     var player = Omx(drum2);

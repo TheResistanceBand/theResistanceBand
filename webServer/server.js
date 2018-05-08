@@ -88,10 +88,10 @@ parser.on('data', data => { // on data from the arduino
     console.log('drum1')
     // io.emit('drum1');
     // if (songPlayer && songPlayer.running) {
-    if (drum1Player && drum1Player.running) {
-      drum1Player.quit();
-      // songPlayer.quit();
-    } else {
+    // if (drum1Player && drum1Player.running) {
+    //   drum1Player.quit();
+    //   // songPlayer.quit();
+    // } else {
       // sound.record();
       // setTimeout(function () {
       //     sound.stop(); // stop after ten seconds
@@ -99,16 +99,16 @@ parser.on('data', data => { // on data from the arduino
       // }, 3000);
       // drum1Player = Omx('./songs/song1.mp3');
       drum1Player = Omx(drum1);
-    }
+    // }
   }
   if (data == 'drum2') {
     console.log('drum2')
     // io.emit('drum1');
-    if (drum2Player && drum2Player.running) {
-      drum2Player.quit();
-    } else {
+    // if (drum2Player && drum2Player.running) {
+    //   drum2Player.quit();
+    // } else {
       drum2Player = Omx(drum2);
-    }
+    // }
   }
   if (data == 'drum3') {
     // io.emit('drum1');

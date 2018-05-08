@@ -7,7 +7,6 @@ var serverPort = 8000;
 var serialPort = require('serialport'); // serial library
 var readLine = serialPort.parsers.Readline; // read serial data as lines
 var Omx = require('node-omxplayer');
-var Sound = require('node-arecord');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -73,78 +72,64 @@ let thereminHighPlayer;
 let flexPlayer;
 let songPlayer;
 
-// var sound = new Sound({
-//  // debug: true,    // Show stdout
-//  destination_folder: './recordings',
-//  filename: 'recording.wav',
-//  alsa_format: 'dat',
-//  alsa_device: 'hw:1,0'
+// var mic = require('mic');
+// var fs = require('fs');
+ 
+// var micInstance = mic({
+//     rate: '16000',
+//     channels: '1',
+//     debug: true,
+//     exitOnSilence: 6
 // });
-
-// sound.record();
-// setTimeout(() => {
-//     sound.stop(); // stop after ten seconds
-//     songPlayer = Omx('./recordings/recording.wav');
-// }, 3000);
-
-var mic = require('mic');
-var fs = require('fs');
+// var micInputStream = micInstance.getAudioStream();
  
-var micInstance = mic({
-    rate: '16000',
-    channels: '1',
-    debug: true,
-    exitOnSilence: 6
-});
-var micInputStream = micInstance.getAudioStream();
+// var outputFileStream = fs.WriteStream('output.wav');
  
-var outputFileStream = fs.WriteStream('output.wav');
+// micInputStream.pipe(outputFileStream);
  
-micInputStream.pipe(outputFileStream);
+// micInputStream.on('data', function(data) {
+//     console.log("Recieved Input Stream: " + data.length);
+// });
  
-micInputStream.on('data', function(data) {
-    console.log("Recieved Input Stream: " + data.length);
-});
+// micInputStream.on('error', function(err) {
+//     cosole.log("Error in Input Stream: " + err);
+// });
  
-micInputStream.on('error', function(err) {
-    cosole.log("Error in Input Stream: " + err);
-});
- 
-micInputStream.on('startComplete', function() {
-    console.log("Got SIGNAL startComplete");
-    setTimeout(function() {
-            micInstance.pause();
-    }, 5000);
-});
+// micInputStream.on('startComplete', function() {
+//     console.log("Got SIGNAL startComplete");
+//     setTimeout(function() {
+//             micInstance.pause();
+//     }, 5000);
+// });
     
-micInputStream.on('stopComplete', function() {
-    console.log("Got SIGNAL stopComplete");
-});
+// micInputStream.on('stopComplete', function() {
+//     console.log("Got SIGNAL stopComplete");
+// });
     
-micInputStream.on('pauseComplete', function() {
-    console.log("Got SIGNAL pauseComplete");
-    setTimeout(function() {
-        micInstance.resume();
-    }, 5000);
-});
+// micInputStream.on('pauseComplete', function() {
+//     console.log("Got SIGNAL pauseComplete");
+//     setTimeout(function() {
+//         micInstance.resume();
+//     }, 5000);
+// });
  
-micInputStream.on('resumeComplete', function() {
-    console.log("Got SIGNAL resumeComplete");
-    setTimeout(function() {
-        micInstance.stop();
-        let micPlayer = Omx('output.wav');
-    }, 5000);
-});
+// micInputStream.on('resumeComplete', function() {
+//     console.log("Got SIGNAL resumeComplete");
+//     setTimeout(function() {
+//         micInstance.stop();
+//         let micPlayer = Omx('output.wav');
+//     }, 5000);
+// });
  
-micInputStream.on('silence', function() {
-    console.log("Got SIGNAL silence");
-});
+// micInputStream.on('silence', function() {
+//     console.log("Got SIGNAL silence");
+// });
  
-micInputStream.on('processExitComplete', function() {
-    console.log("Got SIGNAL processExitComplete");
-});
+// micInputStream.on('processExitComplete', function() {
+//     console.log("Got SIGNAL processExitComplete");
+// });
  
-micInstance.start();
+// micInstance.start();
 
 
 // // Read data that is available on the serial port and send it to the websocket

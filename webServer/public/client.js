@@ -1,8 +1,23 @@
 var socket = io();        // websocket to the server
 
-socket.on('drum1', function() {
-  var audio = new Audio('clap.wav');
-  audio.play();
+// socket.on('drum1', function() {
+//   var audio = new Audio('clap.wav');
+//   audio.play();
+// });
+
+$('#record-start').on('click', e => {
+    socket.emit('record', "start");
+    console.log("Recording Started");
+});
+
+$('#record-stop').on('click', e => {
+    socket.emit('record', "stop");
+    console.log("Recording Stopped");
+});
+
+$('#record-play').on('click', e => {
+    socket.emit('record', "play");
+    console.log("Recording Playing");
 });
 
 $('#theremin-low').on('change', e => {

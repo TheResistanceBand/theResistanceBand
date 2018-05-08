@@ -78,7 +78,7 @@ var sound = new Sound({
  destination_folder: '/recordings',
  filename: 'recording.wav',
  alsa_format: 'dat',
- alsa_device: 'plughw:1,0'
+ alsa_device: 'hw:1,0'
 });
 
 // // Read data that is available on the serial port and send it to the websocket
@@ -89,22 +89,25 @@ parser.on('data', data => { // on data from the arduino
     // io.emit('drum1');
     if (songPlayer && songPlayer.running) {
     // if (drum1Player && drum1Player.running) {
-      // drum1Player.quit();
-      songPlayer.quit();
+      drum1Player.quit();
+      // songPlayer.quit();
     } else {
-      sound.record();
-      setTimeout(function () {
-          sound.stop(); // stop after ten seconds
-          songPlayer = Omx('./recordings/recording.wav');
-      }, 3000);
-      // drum1Player = Omx('./songs/song1.mp3');
+      // sound.record();
+      // setTimeout(function () {
+      //     sound.stop(); // stop after ten seconds
+      //     songPlayer = Omx('./recordings/recording.wav');
+      // }, 3000);
+      drum1Player = Omx('./songs/song1.mp3');
     }
-    // drum1Player = Omx(drum1);
   }
   if (data == 'drum2') {
+    console.log('drum2')
     // io.emit('drum1');
-    console.log('drum2');
-    drum2Player = Omx(drum2);
+    if (drum2Player && drum2Player.running) {
+      drum2Player.quit();
+    } else {
+      drum2Player = Omx('./songs/song1.mp3');
+    }
   }
   if (data == 'drum3') {
     // io.emit('drum1');

@@ -1,8 +1,10 @@
+// Libraries
+#include "Adafruit_VL53L0X.h"
+
 // Define potentiometer pin
 #define drum1Pin A0
 #define drum2Pin A1
 #define drum3Pin A2
-#define thereminPin A4
 #define flexPin A3
 
 // Program variables
@@ -17,11 +19,13 @@ bool isDrum3Playing = false;
 bool isThereminPlaying = false;
 bool isFlexPlaying = false;
 
-
+// Theremin
+Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 
 void setup() {
   // Setup serial monitor
    Serial.begin(9600);
+   lox.begin();
 }
 
 void loop() {
@@ -29,7 +33,6 @@ void loop() {
   drum1Val = analogRead(drum1Pin);
   drum2Val = analogRead(drum2Pin);
   drum3Val = analogRead(drum3Pin);
-  thereminVal = analogRead(thereminPin);
   flexVal = analogRead(flexPin);
   
   if (drum1Val > 200 && !isDrum1Playing) {
@@ -66,4 +69,34 @@ void loop() {
   } else if (flexVal > 450 && isFlexPlaying) {
     isFlexPlaying = false;
   }
+
+  // Sensor measure object
+  VL53L0X_RangingMeasurementData_t measure;
+
+  // Get the measurement
+  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+
+  // Check for a valid measurement
+  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
+    thereminVal = measure.RangeMilliMeter;
+  }
+  if (thereminVal >= 60 && thereminVal <= 150) {
+    if (!isThereminPlaying) {
+      Serial.println("theremin1");
+    }
+    isThereminPlaying = true;
+  } else if (thereminVal >= 151 && thereminVal <= 250) {
+    if (!isThereminPlaying) {
+      Serial.println("theremin2");
+    }
+    isThereminPlaying = true;
+  } else if (thereminVal >= 251) {
+    if (!isThereminPlaying) {
+      Serial.println("theremin3");
+    }
+    isThereminPlaying = true;
+  } else {
+    isThereminPlaying = false;
+  }
+  
 }

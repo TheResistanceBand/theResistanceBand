@@ -24,7 +24,6 @@ http.listen(serverPort, function() {
 // start the serial port connection and read on newlines
 const serial = new serialPort('/dev/ttyUSB0', {
  baudRate:9600
-
 });
 const parser = new readLine({
   delimiter: '\r\n'
@@ -68,32 +67,42 @@ let flex = flexHash['a'];
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
 parser.on('data', data => { // on data from the arduino
+  print('!!!!!!');
+  print(data);
+  print('!!!!!!');
   if (data == 'drum1') {
+    console.log('drum1')
     // io.emit('drum1');
     var player = Omx(drum1);
   }
   if (data == 'drum2') {
     // io.emit('drum1');
+    console.log('drum2')
     var player = Omx(drum2);
   }
   if (data == 'drum3') {
     // io.emit('drum1');
+    console.log('drum3')
     var player = Omx(drum3);
   }
   if (data == 'thereminLow') {
     // io.emit('drum1');
+    console.log('thereminLow')
     var player = Omx(thereminLow);
   }
   if (data == 'thereminMid') {
     // io.emit('drum1');
+    console.log('thereminMid')
     var player = Omx(thereminMid);
   }
   if (data == 'thereminHigh') {
     // io.emit('drum1');
+    console.log('thereminHigh')
     var player = Omx(thereminHigh);
   }
   if (data == 'flex') {
     // io.emit('drum1');
+    console.log('flex')
     var player = Omx(flex);
   }
 });

@@ -75,7 +75,7 @@ let songPlayer;
 
 var sound = new Sound({
  debug: true,    // Show stdout
- destination_folder: './recordings',
+ destination_folder: '/recordings',
  filename: 'recording.wav',
  alsa_format: 'dat',
  alsa_device: 'plughw:1,0'
@@ -87,7 +87,8 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');
-    if (drum1Player && drum1Player.running) {
+    if (songPlayer && songPlayer.running) {
+    // if (drum1Player && drum1Player.running) {
       // drum1Player.quit();
       songPlayer.quit();
     } else {

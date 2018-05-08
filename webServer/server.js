@@ -196,6 +196,25 @@ io.on('connect', socket => {
     console.log('user disconnected');
   });
 
+  socket.on('play-song', val => {
+    if (val === 1) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song1.mp3')
+    } else if (val === 2) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song2.mp3')
+    } else if (val === 3) {
+      if (songPlayer && songPlayer.running) {
+        songPlayer.quit();
+      }
+      songPlayer = Omx('./songs/song3.mp3')
+    }
+  });
+
   socket.on('thereminLowChange', val => {
     thereminLow = thereminHash[val];
     var player = Omx(thereminLow);

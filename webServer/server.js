@@ -55,9 +55,9 @@ let flexHash = {
 
 
 //drum variables
-let drum1 = drumHash['drum1A'];
-let drum2 = drumHash['drum2A'];
-let drum3 = drumHash['drum3A'];
+let drum1 = drumHash['a1'];
+let drum2 = drumHash['a2'];
+let drum3 = drumHash['a3'];
 let thereminLow = thereminHash['a'];
 let thereminMid = thereminHash['b'];
 let thereminHigh = thereminHash['c'];

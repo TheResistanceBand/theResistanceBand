@@ -7,6 +7,7 @@ var serverPort = 8000;
 var serialPort = require('serialport'); // serial library
 var readLine = serialPort.parsers.Readline; // read serial data as lines
 var Omx = require('node-omxplayer');
+var Sound = require('node-arecord');
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -70,7 +71,15 @@ let thereminLowPlayer;
 let thereminMidPlayer;
 let thereminHighPlayer;
 let flexPlayer;
-let micPlayer;
+let songPlayer;
+
+var sound = new Sound({
+ debug: true,    // Show stdout
+ destination_folder: './recordings',
+ filename: 'recording.wav',
+ alsa_format: 'dat',
+ alsa_device: 'plughw:1,0'
+});
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -79,10 +88,14 @@ parser.on('data', data => { // on data from the arduino
     console.log('drum1')
     // io.emit('drum1');
     if (drum1Player && drum1Player.running) {
-      micPlayer.quit();
       // drum1Player.quit();
+      songPlayer.quit();
     } else {
-      micPlayer = Omx();
+      sound.record();
+      setTimeout(function () {
+          sound.stop(); // stop after ten seconds
+          songPlayer = Omx('./recordings/recording.wav');
+      }, 3000);
       // drum1Player = Omx('./songs/song1.mp3');
     }
     // drum1Player = Omx(drum1);

@@ -131,18 +131,13 @@ parser.on('data', data => { // on data from the arduino
     thereminHighPlayer = Omx(thereminHigh);
   }
   if (data == 'flex') {
-    console.log('drum1')
+    console.log('flex')
     // io.emit('drum1');
     if (flexPlayer && flexPlayer.running) {
       flexPlayer.quit();
     } else {
       flexPlayer = Omx(flex);
     }
-  }
-  if (data == 'flex') {
-    // io.emit('drum1');
-    console.log('flex')
-    flexPlayer = Omx(flex);
   }
 });
 //----------------------------------------------------------------------------//

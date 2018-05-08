@@ -78,8 +78,14 @@ var sound = new Sound({
  destination_folder: '/recordings',
  filename: 'recording.wav',
  alsa_format: 'dat',
- alsa_device: 'plughw:1,0'
+ alsa_device: 'hw:1,0'
 });
+
+sound.record();
+setTimeout(() => {
+    sound.stop(); // stop after ten seconds
+    songPlayer = Omx('./recordings/recording.wav');
+}, 3000);
 
 // // Read data that is available on the serial port and send it to the websocket
 serial.pipe(parser);
@@ -87,23 +93,17 @@ parser.on('data', data => { // on data from the arduino
   if (data == 'drum1') {
     console.log('drum1')
     // io.emit('drum1');
-    if (songPlayer && songPlayer.running) {
+    // if (songPlayer && songPlayer.running) {
     // if (drum1Player && drum1Player.running) {
-      // drum1Player.quit();
-      songPlayer.quit();
-    } else {
-      sound.record();
-      setTimeout(function () {
-          sound.stop(); // stop after ten seconds
-          songPlayer = Omx('./recordings/recording.wav');
-      }, 3000);
+    //   drum1Player.quit();
+    //   // songPlayer.quit();
+    // } else {
       // drum1Player = Omx('./songs/song1.mp3');
-    }
-    // drum1Player = Omx(drum1);
+      drum1Player = Omx(drum1);
+    // }
   }
   if (data == 'drum2') {
-    // io.emit('drum1');
-    console.log('drum2');
+    console.log('drum2')
     drum2Player = Omx(drum2);
   }
   if (data == 'drum3') {
@@ -127,9 +127,14 @@ parser.on('data', data => { // on data from the arduino
     thereminHighPlayer = Omx(thereminHigh);
   }
   if (data == 'flex') {
-    // io.emit('drum1');
     console.log('flex')
-    flexPlayer = Omx(flex);
+    // io.emit('drum1');
+    if (flexPlayer && flexPlayer.running) {
+      flexPlayer.quit();
+      flexPlayer = Omx(flex);
+    } else {
+      flexPlayer = Omx(flex);
+    }
   }
 });
 //----------------------------------------------------------------------------//

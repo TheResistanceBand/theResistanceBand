@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 .theremin-container {
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
   position: relative;
   left: 10%;
   margin-top: 2rem;

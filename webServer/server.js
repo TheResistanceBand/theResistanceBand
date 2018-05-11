@@ -95,19 +95,19 @@ parser.on('data', data => { // on data from the arduino
     console.log('drum3')
     drum3Player = Omx(drum3);
   }
-  if (data == 'thereminLow') {
+  if (data == 'theremin1') {
     // io.emit('drum1');
-    console.log('thereminLow')
+    console.log('theremin1')
     thereminLowPlayer = Omx(thereminLow);
   }
-  if (data == 'thereminMid') {
+  if (data == 'theremin2') {
     // io.emit('drum1');
-    console.log('thereminMid')
+    console.log('theremin2')
     thereminMidPlayer = Omx(thereminMid);
   }
-  if (data == 'thereminHigh') {
+  if (data == 'theremin3') {
     // io.emit('drum1');
-    console.log('thereminHigh')
+    console.log('theremin3')
     thereminHighPlayer = Omx(thereminHigh);
   }
   if (data == 'flex') {
